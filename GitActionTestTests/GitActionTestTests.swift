@@ -35,8 +35,8 @@ class GitActionTestTests: XCTestCase {
         XCTAssertTrue(true)
     }
     
-    func testFailure() {
-        XCTAssertTrue(false)
-    }
+//    func testFailure() {
+//        XCTAssertTrue(false)
+//    }
 
 }
