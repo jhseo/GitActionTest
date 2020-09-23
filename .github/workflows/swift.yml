@@ -13,5 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run:
+        pod install --repo-update
+      shell: bash        
+
     - name: Run tests
-      run: xcodebuild clean test -project GitActionTest.xcodeproj -scheme GitActionTest -destination "platform=iOS Simulator,name=iPhone 8" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      run: xcodebuild clean test -workspace GitActionTest.xcworkspace -scheme GitActionTest -destination "platform=iOS Simulator,name=iPhone 8" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
