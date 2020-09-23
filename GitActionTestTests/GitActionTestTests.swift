@@ -30,5 +30,13 @@ class GitActionTestTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testSuccess() {
+        XCTAssertTrue(true)
+    }
+    
+    func testFailure() {
+        XCTAssertTrue(false)
+    }
 
 }
