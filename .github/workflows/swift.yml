@@ -14,7 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Dependencies
-      run:
+      run: |
+        carthage bootstrap --no-use-binaries --platform iOS --cache-builds
         pod install --repo-update
       shell: bash        
 

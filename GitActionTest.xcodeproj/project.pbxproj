@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		43E07104251ACC0B00988169 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43E07103251ACC0B00988169 /* Assets.xcassets */; };
 		43E07107251ACC0B00988169 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43E07105251ACC0B00988169 /* LaunchScreen.storyboard */; };
 		43E07112251ACC0C00988169 /* GitActionTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E07111251ACC0C00988169 /* GitActionTestTests.swift */; };
+		43E0711E251B34D200988169 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0711D251B34D200988169 /* Alamofire.framework */; };
 		463CBC72A8D952564528A0FD /* Pods_GitActionTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A13D9BC576FB862D4B7005 /* Pods_GitActionTestTests.framework */; };
 		58E30BAFA91242154FB44674 /* Pods_GitActionTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC83F73099D4CC969D1D63FA /* Pods_GitActionTest.framework */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		43E0710D251ACC0C00988169 /* GitActionTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitActionTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E07111251ACC0C00988169 /* GitActionTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitActionTestTests.swift; sourceTree = "<group>"; };
 		43E07113251ACC0C00988169 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43E0711D251B34D200988169 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		C42638AA14559156F03D35D2 /* Pods-GitActionTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitActionTestTests.release.xcconfig"; path = "Target Support Files/Pods-GitActionTestTests/Pods-GitActionTestTests.release.xcconfig"; sourceTree = "<group>"; };
 		CC83F73099D4CC969D1D63FA /* Pods_GitActionTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitActionTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A13D9BC576FB862D4B7005 /* Pods_GitActionTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitActionTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43E0711E251B34D200988169 /* Alamofire.framework in Frameworks */,
 				58E30BAFA91242154FB44674 /* Pods_GitActionTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,13 +122,13 @@
 				163A1910F31D2129F5376C29 /* Pods-GitActionTestTests.debug.xcconfig */,
 				C42638AA14559156F03D35D2 /* Pods-GitActionTestTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		AD02C9D48484373FB399839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43E0711D251B34D200988169 /* Alamofire.framework */,
 				CC83F73099D4CC969D1D63FA /* Pods_GitActionTest.framework */,
 				D5A13D9BC576FB862D4B7005 /* Pods_GitActionTestTests.framework */,
 			);
@@ -144,6 +147,7 @@
 				43E070F4251ACC0800988169 /* Frameworks */,
 				43E070F5251ACC0800988169 /* Resources */,
 				724129DFA1771A4385FD9E7F /* [CP] Embed Pods Frameworks */,
+				43E0711C251B316100988169 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -253,6 +257,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		43E0711C251B316100988169 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		724129DFA1771A4385FD9E7F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -465,10 +487,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 936JHHB5Z3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GitActionTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jhseo.GitActionTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,10 +511,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 936JHHB5Z3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GitActionTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jhseo.GitActionTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
