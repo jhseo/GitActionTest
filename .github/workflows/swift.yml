@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Checkout source code.
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
     
     - name: Install Dependencies
       run: |
@@ -25,7 +25,7 @@ jobs:
       run: xcodebuild clean test -workspace GitActionTest.xcworkspace -scheme GitActionTest -destination "platform=iOS Simulator,name=iPhone 8" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
 
     - name: Cache CocoaPods
-    - uses: actions/cache@v2
+      uses: actions/cache@v2
       with:
         path: Pods
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
