@@ -12,18 +12,8 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Checkout source code.
-      uses: actions/checkout@v2
-    
-    - name: Install Dependencies
-      run: |
-        carthage bootstrap --no-use-binaries --platform iOS --cache-builds
-        pod install --repo-update
-      shell: bash        
-
-    - name: Run tests
-      run: xcodebuild clean test -workspace GitActionTest.xcworkspace -scheme GitActionTest -destination "platform=iOS Simulator,name=iPhone 8" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-
+    - uses: actions/checkout@v2
+                
     - name: Cache CocoaPods
       uses: actions/cache@v2
       with:
@@ -31,3 +21,21 @@ jobs:
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-pods-
+          
+    - name: Cache Carthage
+      uses: actions/cache@v2
+      with:
+        path: Carthage
+        key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-carthage-
+    
+    - name: Install Dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        carthage bootstrap --platform iOS --cache-builds
+        pod install --repo-update
+      shell: bash  
+
+    - name: Run tests
+      run: xcodebuild clean test -workspace GitActionTest.xcworkspace -scheme GitActionTest -destination "platform=iOS Simulator,name=iPhone 8" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
